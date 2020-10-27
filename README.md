@@ -4,7 +4,7 @@
 
 ---
 
-**tyneovim** is an utility repository for my neovim configuration files
+**tyneovim** is a repository for my neovim configuration files
 
 ---
 
