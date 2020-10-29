@@ -188,6 +188,9 @@ imap <C-s> <Plug>(neosnippet_expand_or_jump)
 smap <C-s> <Plug>(neosnippet_expand_or_jump)
 xmap <C-s> <Plug>(neosnippet_expand_target)
 
+" === vim-signify ==="
+nmap <silent> <leader>s :SignifyToggle<CR>
+
 " Allows you to save files you opened without write permissions via sudo
 cmap w!! w !sudo tee %
 
@@ -196,6 +199,8 @@ cmap w!! w !sudo tee %
 " Vim's default buffer
 vnoremap <leader>p "_dP
 
+" Show the line number from a toggle
+nnoremap <silent> <leader>l :set rnu! number!<CR>
 
 " ============================================================================ "
 " ===                                UI                                    === "
@@ -235,6 +240,12 @@ function! s:my_colors_setup()
 endfunction
 
 autocmd! ColorScheme * call s:my_colors_setup()
+
+try
+  colorscheme OceanicNext
+catch
+  colorscheme slate
+endtry
 
 " ============================================================================ "
 " ===                           PLUGIN SETUP                               === "
