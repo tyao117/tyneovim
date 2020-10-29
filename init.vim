@@ -34,9 +34,6 @@ set noshowcmd
 " Shows up in preview window when airline is disabled if not
 set noruler
 
-" Only one line for command line
-set cmdheight=1
-
 " === Completion Settings === "
 
 " Don't give completion messages like 'match 1 of 2'
@@ -66,7 +63,7 @@ highlight ColorColumn ctermbg=0 guibg=darkgrey
 
 " === In Visual Block, Use J and K to move a block of code === "
 vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '>-2<CR>gv=gv
+vnoremap K :m '>\-2<CR>gv=gv
 
 " === Denite shorcuts === "
 "   <leader>;         - Browser currently open buffers
@@ -155,14 +152,14 @@ nnoremap <C-l> <C-W><C-l>
 nnoremap <C-h> <C-W><C-h>
 
 " === coc.nvim === "
-"   <leader>dd    - Jump to definition of current symbol
-"   <leader>dr    - Jump to references of current symbol
-"   <leader>dj    - Jump to implementation of current symbol
-"   <leader>ds    - Fuzzy search current project symbols
+"   <leader>gd    - Jump to definition of current symbol
+"   <leader>gr    - Jump to references of current symbol
+"   <leader>gj    - Jump to implementation of current symbol
+"   <leader>gs    - Fuzzy search current project symbols
 nmap <silent> <leader>gd <Plug>(coc-definition)
 nmap <silent> <leader>gr <Plug>(coc-references)
 nmap <silent> <leader>gi <Plug>(coc-implementation)
-nnoremap <silent> <leader>ds :<C-u>CocList -I -N --top symbols<CR>
+nnoremap <silent> <leader>gs :<C-u>CocList -I -N --top symbols<CR>
 
 " Use <c-space> to trigger completion.
 if has('nvim')
@@ -199,6 +196,7 @@ cmap w!! w !sudo tee %
 " Vim's default buffer
 vnoremap <leader>p "_dP
 
+
 " ============================================================================ "
 " ===                                UI                                    === "
 " ============================================================================ "
@@ -224,6 +222,11 @@ function! s:my_colors_setup()
     hi link CocErrorSign WarningMsg
     hi link CocWarningSign Number
     hi link CocInfoSign Type
+
+    "  " Make background color transparent for git changes
+    hi SignifySignAdd guibg=NONE
+    hi SignifySignDelete guibg=NONE
+    hi SignifySignChange guibg=NONE
 
     hi Pmenu guibg=#d7e5dc gui=NONE
     hi PmenuSel guibg=#b7c7b7 gui=NONE
