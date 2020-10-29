@@ -1,0 +1,10 @@
+{
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnSaveFiletypes": ["go", "markdown", "javascript", "typescript", "json", "jsonc", "python"],
+  "prettier.printWidth": 160,
+  "prettier.singleQuote": true,
+  "prettier.eslintIntegration": true,
+  "codeLens.enable": true,
+  "python.pythonPath": "/Users/timothyyao/.pyenv/shims/python"
+}

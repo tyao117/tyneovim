@@ -219,16 +219,20 @@ set noshowmode
 set winbl=10
 
 " Customize colors
-func! s:my_colors_setup() abort
+function! s:my_colors_setup()
+    " coc.nvim color changes
+    hi link CocErrorSign WarningMsg
+    hi link CocWarningSign Number
+    hi link CocInfoSign Type
+
     hi Pmenu guibg=#d7e5dc gui=NONE
     hi PmenuSel guibg=#b7c7b7 gui=NONE
     hi PmenuSbar guibg=#bcbcbc
     hi PmenuThumb guibg=#585858
-endfunc
+endfunction
 
-augroup colorscheme_coc_setup | au!
-    au ColorScheme * call s:my_colors_setup()
-augroup END
+autocmd! ColorScheme * call s:my_colors_setup()
+
 " ============================================================================ "
 " ===                           PLUGIN SETUP                               === "
 " ============================================================================ "
