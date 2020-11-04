@@ -9,7 +9,7 @@
 ---
 ## Preqeqs
 
-Must have nodejs (My example is on Ubuntu)
+- nodejs (My example is on Ubuntu)
 
     curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
     sudo apt-get install -y nodejs
