@@ -63,7 +63,7 @@ highlight ColorColumn ctermbg=0 guibg=darkgrey
 
 " === In Visual Block, Use J and K to move a block of code === "
 vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '>\-2<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 " === Denite shorcuts === "
 "   <leader>;         - Browser currently open buffers
@@ -146,10 +146,10 @@ nmap <leader>f :NERDTreeFind<CR>
 
 " remap for split panes
 
-nnoremap <C-j> <C-W><C-j>
-nnoremap <C-k> <C-W><C-k>
-nnoremap <C-l> <C-W><C-l>
-nnoremap <C-h> <C-W><C-h>
+" nnoremap <C-j> <C-W><C-j>
+" nnoremap <C-k> <C-W><C-k>
+" nnoremap <C-l> <C-W><C-l>
+" nnoremap <C-h> <C-W><C-h>
 
 " === coc.nvim === "
 "   <leader>gd    - Jump to definition of current symbol
@@ -184,9 +184,9 @@ map <leader>w <Plug>(easymotion-bd-w)
 
 " === NeoSnippet === "
 " Map <C-k> as shortcut to activate snippet if available
-imap <C-s> <Plug>(neosnippet_expand_or_jump)
-smap <C-s> <Plug>(neosnippet_expand_or_jump)
-xmap <C-s> <Plug>(neosnippet_expand_target)
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " === vim-signify ==="
 nmap <silent> <leader>s :SignifyToggle<CR>
