@@ -12,7 +12,7 @@ source ~/.config/nvim/plugins.vim
 let g:python_host_prog = "$HOME/.pyenv/versions/2.7.18/bin/python"
 
 " Setting the host of Python 3
-let g:python3_host_prog = "$HOME/.pyenv/versions/3.8.3/bin/python3"
+let g:python3_host_prog = "/usr/local/bin/python3"
 
 " === TAB/Space Settings === "
 " Insert spaces when TAB is pressed.
