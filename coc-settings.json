@@ -2,7 +2,7 @@
   "coc.preferences.extensionUpdateCheck": "daily",
   "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSaveFiletypes": ["go", "python", "markdown", "javascript", "typescript", "json", "jsonc"],
-  "prettier.printWidth": 160,
+  "prettier.printWidth": 80,
   "prettier.singleQuote": true,
   "codeLens.enable": true,
   "jedi.enable": true,
