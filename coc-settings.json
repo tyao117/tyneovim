@@ -1,9 +1,15 @@
 {
   "coc.preferences.extensionUpdateCheck": "daily",
   "coc.preferences.formatOnType": true,
-  "coc.preferences.formatOnSaveFiletypes": ["go", "markdown", "javascript", "typescript", "json", "jsonc"],
+  "coc.preferences.formatOnSaveFiletypes": ["go", "python", "markdown", "javascript", "typescript", "json", "jsonc"],
   "prettier.printWidth": 160,
   "prettier.singleQuote": true,
   "codeLens.enable": true,
-  "python.pythonPath": "/Users/timothyyao/.pyenv/shims/python"
+  "jedi.enable": true,
+  "languageserver": {
+    "python": {
+        "command": "jedi-language-server",
+        "filetypes": ["python"]
+    }
+  }
 }

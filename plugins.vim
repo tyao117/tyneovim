@@ -13,7 +13,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Denite - Fuzzy finding, buffer management
-Plug 'Shougo/denite.nvim'
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Snippet support
 Plug 'Shougo/neosnippet'

@@ -9,10 +9,10 @@ source ~/.config/nvim/plugins.vim
 " let g:mapleader=','
 
 " Setting the host of Python 2
-let g:python_host_prog = "$HOME/.pyenv/versions/2.7.18/bin/python"
+let g:python_host_prog = 0
 
 " Setting the host of Python 3
-let g:python3_host_prog = "$HOME/.pyenv/versions/3.8.3/bin/python3"
+let g:python3_host_prog = "/usr/bin/python3"
 
 " === TAB/Space Settings === "
 " Insert spaces when TAB is pressed.
@@ -56,6 +56,9 @@ set updatetime=50
 " Set the column width to be 80 "
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=darkgrey
+
+" Allow the formatting when pasting into vim
+set paste
 
 " ============================================================================ "
 " ===                             KEY MAPPINGS                             === "
