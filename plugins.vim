@@ -6,21 +6,18 @@ Plug 'ntpeters/vim-better-whitespace'
 " auto-close plugin
 Plug 'rstacruz/vim-closer'
 
+
+" FZF
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-unimpaired'
+
 " Improved motion in Vim
 Plug 'easymotion/vim-easymotion'
 
 " Intellisense Engine
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Denite - Fuzzy finding, buffer management
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" Snippet support
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-
-" Print function signatures in echo area
-Plug 'Shougo/echodoc.vim'
 
 " Make smooth scrolling going up and down
 Plug 'psliwka/vim-smoothie'
@@ -35,8 +32,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'othree/yajs.vim'
 
 " === UI === "
-" File explorer
-Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-vinegar'
+
+" Formatting
+Plug 'Yggdroot/indentLine'
 
 " Colorscheme
 Plug 'mhartington/oceanic-next'
