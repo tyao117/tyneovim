@@ -1,6 +1,5 @@
 " Get the plugins from my plugins file
 source ~/.config/nvim/plugins.vim
-source ~/.tyneovim/plugconfig/netrw.vim
 source ~/.tyneovim/plugconfig/fern.vim
 
 " ============================================================================ "

@@ -36,6 +36,10 @@ Plug 'tpope/vim-vinegar'
 
 " === File Tree === "
 Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern-hijack.vim'
+
+" Helping with mappings
+Plug 'liuchengxu/vim-which-key'
 
 " Formatting
 Plug 'Yggdroot/indentLine'
