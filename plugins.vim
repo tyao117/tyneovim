@@ -6,9 +6,9 @@ Plug 'ntpeters/vim-better-whitespace'
 " auto-close plugin
 Plug 'rstacruz/vim-closer'
 
-
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-unimpaired'
@@ -34,9 +34,14 @@ Plug 'othree/yajs.vim'
 " === UI === "
 Plug 'tpope/vim-vinegar'
 
+" === File Tree === "
+Plug 'lambdalisue/fern.vim'
+
 " Formatting
 Plug 'Yggdroot/indentLine'
 
+" Signify
+Plug 'mhinz/vim-signify'
 " Colorscheme
 Plug 'mhartington/oceanic-next'
 
@@ -46,5 +51,4 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Icons
 Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 call plug#end()

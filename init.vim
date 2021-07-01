@@ -1,13 +1,11 @@
 " Get the plugins from my plugins file
 source ~/.config/nvim/plugins.vim
 source ~/.tyneovim/plugconfig/netrw.vim
+source ~/.tyneovim/plugconfig/fern.vim
 
 " ============================================================================ "
 " ===                           EDITING OPTIONS                            === "
 " ============================================================================ "
-
-" Remap leader key to ,
-" let g:mapleader=','
 
 " Setting the host of Python 2
 let g:python_host_prog = 0
@@ -96,7 +94,7 @@ nmap <leader>y :StripWhitespace<CR>
 
 " === Search shorcuts === "
 "   <leader>h - Find and replace
-"   <leader>/ - Claer highlighted search terms while preserving history
+"   <leader>/ - Clear highlighted search terms while preserving history
 map <leader>h :%s///<left><left>
 nmap <silent> <leader>/ :nohlsearch<CR>
 
@@ -131,7 +129,7 @@ set fillchars+=vert:.
 " Set preview window to appear at bottom
 set splitbelow
 
-" Don't dispay mode in command line (airilne already shows it)
+" Don't display mode in command line (airilne already shows it)
 set noshowmode
 
 " Set floating window to be slightly transparent
