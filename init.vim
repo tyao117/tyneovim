@@ -1,6 +1,6 @@
 " Get the plugins from my plugins file
 source ~/.config/nvim/plugins.vim
-source ~/.tyneovim/plugconfig/fern.vim
+source ~/.tyneovim/plug-config/fern.vim
 
 " ============================================================================ "
 " ===                           EDITING OPTIONS                            === "
@@ -12,28 +12,21 @@ let g:python_host_prog = 0
 " Setting the host of Python 3
 let g:python3_host_prog = "~/nvim/bin/python"
 
-" Allowing to keep multiple buffers open
-set hidden
+set hidden " Allowing to keep multiple buffers open
 
 " === TAB/Space Settings === "
-" Insert spaces when TAB is pressed.
-set expandtab
+set expandtab " Insert spaces when TAB is pressed.
 
-" Defining how wide a tab is defined
-set tabstop=4
+set tabstop=4 " Defining how wide a tab is defined
 
-" Change number of space that a <TAB> counts for during editing
-set softtabstop=4
+set softtabstop=4 " Change number of space that a <TAB> counts for during editing
 
-" Indentation amount for < and > commands
-set shiftwidth=4
+set shiftwidth=4 " Indentation amount for < and > commands
 
-" Don't show last command
-set noshowcmd
+set noshowcmd " Don't show last command
 
-" Disable line/column number in status line
+set noruler " Disable line/column number in status line
 " Shows up in preview window when airline is disabled if not
-set noruler
 
 " === Completion Settings === "
 
@@ -56,10 +49,25 @@ set updatetime=50
 
 " Set the column width to be 80 "
 set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=darkgrey
 
-" Allow the usage of prettier on save
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+" ============================================================================ "
+" ===                                UI                                    === "
+" ============================================================================ "
+
+" Enable true color support
+set termguicolors
+
+" Change vertical split character to be a space (essentially hide it)
+set fillchars+=vert:.
+
+" Set preview window to appear at bottom
+set splitbelow
+
+" Don't display mode in command line (airilne already shows it)
+set noshowmode
+
+" Set floating window to be slightly transparent
+set winbl=10
 
 " ============================================================================ "
 " ===                             KEY MAPPINGS                             === "
@@ -115,50 +123,6 @@ vnoremap <leader>p "_dP
 " Show the line number from a toggle
 nnoremap <silent> <leader>l :set rnu! number!<CR>
 
-" ============================================================================ "
-" ===                                UI                                    === "
-" ============================================================================ "
-
-" Enable true color support
-set termguicolors
-
-" Change vertical split character to be a space (essentially hide it)
-set fillchars+=vert:.
-
-" Set preview window to appear at bottom
-set splitbelow
-
-" Don't display mode in command line (airilne already shows it)
-set noshowmode
-
-" Set floating window to be slightly transparent
-set winbl=10
-
-" Customize colors
-function! s:my_colors_setup()
-    " coc.nvim color changes
-    hi link CocErrorSign WarningMsg
-    hi link CocWarningSign Number
-    hi link CocInfoSign Type
-
-    "  " Make background color transparent for git changes
-    hi SignifySignAdd guibg=NONE
-    hi SignifySignDelete guibg=NONE
-    hi SignifySignChange guibg=NONE
-
-    hi Pmenu guibg=#d7e5dc gui=NONE
-    hi PmenuSel guibg=#b7c7b7 gui=NONE
-    hi PmenuSbar guibg=#bcbcbc
-    hi PmenuThumb guibg=#585858
-endfunction
-
-autocmd! ColorScheme * call s:my_colors_setup()
-
-try
-  colorscheme OceanicNext
-catch
-  colorscheme slate
-endtry
 
 " ============================================================================ "
 " ===                           PLUGIN SETUP                               === "
@@ -214,7 +178,6 @@ let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'z', 'warning'
 " 'nerdtree'  - Hide nerdtree status line
 " 'list'      - Only show file type plus current line number out of total
 let g:airline_filetype_overrides = {
-  \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', ''), '' ],
   \ 'list': [ '%y', '%l/%L'],
   \ }
 

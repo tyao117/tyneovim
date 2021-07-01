@@ -27,3 +27,35 @@ Launch the following commands:
     ln -sfv ~/.tyneovim/plugins.vim ~/.config/nvim
     curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     nvim +PlugInstall +CocInstall coc-neosnippet coc-json coc-yaml coc-highlight coc-jedi coc-yaml coc-highlight +qall
+
+## Some vimconfigs that are being deprecated
+
+```vim
+" changing my color set
+function! s:my_colors_setup()
+    " coc.nvim color changes
+    hi link CocErrorSign WarningMsg
+    hi link CocWarningSign Number
+    hi link CocInfoSign Type
+
+    "  " Make background color transparent for git changes
+    hi SignifySignAdd guibg=NONE
+    hi SignifySignDelete guibg=NONE
+    hi SignifySignChange guibg=NONE
+
+    hi Pmenu guibg=#d7e5dc gui=NONE
+    hi PmenuSel guibg=#b7c7b7 gui=NONE
+    hi PmenuSbar guibg=#bcbcbc
+    hi PmenuThumb guibg=#585858
+endfunction
+
+autocmd! ColorScheme * call s:my_colors_setup()
+
+try
+  colorscheme OceanicNext
+catch
+  colorscheme slate
+endtry
+
+highlight ColorColumn ctermbg=0 guibg=darkgrey
+```

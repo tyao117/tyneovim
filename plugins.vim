@@ -1,58 +1,38 @@
-call plug#begin('~/.config/nvim/plugged')
-" === Editing Plugins === "
-" Trailing whitespace highlighting & automatic fixing
-Plug 'ntpeters/vim-better-whitespace'
-
-" auto-close plugin
-Plug 'rstacruz/vim-closer'
-
-" FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-unimpaired'
-
-" Improved motion in Vim
+call plug#begin('~/.vim/plugged')
+" Themes
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tomasiser/vim-code-dark'
+Plug 'gruvbox-community/gruvbox'
+" Start menu
+Plug 'mhinz/vim-startify'
+" Formatting and syntax
+Plug 'Yggdroot/indentLine'
+" Ansible linting
+Plug 'pearofducks/ansible-vim'
+" Neovim Cursor Hold Fix
+Plug 'antoinemadec/FixCursorHold.nvim'
+" Floating preview window
+" Plug 'ncm2/float-preview.nvim'
+" Easier motion in Vim
 Plug 'easymotion/vim-easymotion'
-
 " Intellisense Engine
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 " Make smooth scrolling going up and down
 Plug 'psliwka/vim-smoothie'
-
-" === Git Plugins === "
 " Enable git changes to be shown in sign column
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
-
-" === Syntax Highlighting === "
-" Improved syntax highlighting and indentation
-Plug 'othree/yajs.vim'
-
-" === UI === "
-Plug 'tpope/vim-vinegar'
-
-" === File Tree === "
-Plug 'lambdalisue/fern.vim'
-Plug 'lambdalisue/fern-hijack.vim'
-
 " Helping with mappings
 Plug 'liuchengxu/vim-which-key'
-
-" Formatting
-Plug 'Yggdroot/indentLine'
-
-" Signify
-Plug 'mhinz/vim-signify'
-" Colorscheme
-Plug 'mhartington/oceanic-next'
-
-" Customized vim status line
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" Icons
-Plug 'ryanoasis/vim-devicons'
+" File Tree
+Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern-hijack.vim'
+" FZF
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+" Misc
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-unimpaired'
 call plug#end()
