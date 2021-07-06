@@ -1,6 +1,8 @@
 " Get the plugins from my plugins file
 source ~/.config/nvim/plugins.vim
 source ~/.tyneovim/plug-config/fern.vim
+source ~/.tyneovim/plug-config/airline.vim
+source ~/.tyneovim/plug-config/signify.vim
 
 " ============================================================================ "
 " ===                           EDITING OPTIONS                            === "
@@ -83,10 +85,21 @@ vnoremap K :m '<-2<CR>gv=gv
 "   <leader>gr    - Jump to references of current symbol
 "   <leader>gj    - Jump to implementation of current symbol
 "   <leader>gs    - Fuzzy search current project symbols
+"   use <tab> for trigger completion and navigate to next complete item
 nmap <silent> <leader>gd <Plug>(coc-definition)
 nmap <silent> <leader>gr <Plug>(coc-references)
 nmap <silent> <leader>gi <Plug>(coc-implementation)
 nnoremap <silent> <leader>gs :<C-u>CocList -I -N --top symbols<CR>
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 
 " Use <c-space> to trigger completion.
 if has('nvim')
@@ -94,6 +107,28 @@ if has('nvim')
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
+
+" === Fern ==="
+noremap <silent> <leader>n :Fern . -drawer -toggle <CR>
+
+function! s:init_fern() abort
+    nmap <buffer> H <Plug>(fern-action-open:split)
+    nmap <buffer> V <Plug>(fern-action-open:vsplit)
+    nmap <buffer> R <Plug>(fern-action-rename)
+    nmap <buffer> M <Plug>(fern-action-move)
+    nmap <buffer> C <Plug>(fern-action-copy)
+    nmap <buffer> N <Plug>(fern-action-new-path)
+    nmap <buffer> T <Plug>(fern-action-new-file)
+    nmap <buffer> D <Plug>(fern-action-new-dir)
+    nmap <buffer> S <Plug>(fern-action-hidden-toggle)
+    nmap <buffer> dd <Plug>(fern-action-trash)
+endfunction
+
+augroup fern-custom
+    autocmd! *
+    autocmd FileType fern call s:init_fern()
+augroup END
+
 
 " === vim-better-whitespace === "
 "   <leader>y - Automatically remove trailing whitespace
@@ -123,25 +158,12 @@ vnoremap <leader>p "_dP
 " Show the line number from a toggle
 nnoremap <silent> <leader>l :set rnu! number!<CR>
 
-
 " ============================================================================ "
 " ===                           PLUGIN SETUP                               === "
 " ============================================================================ "
 
 " Wrap in try/catch to avoid errors on initial install before plugin is available
 try
-
-" === Coc.nvim === "
-" use <tab> for trigger completion and navigate to next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
 
 "Close preview window when completion is done.
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -157,51 +179,6 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 endtry
 
-" === Vim airline ==== "
-try
-" Enable extensions
-let g:airline_extensions = ['branch', 'hunks', 'coc']
-
-" Update section z to just have line number
-let g:airline_section_z = airline#section#create(['linenr'])
-
-" Do not draw separators for empty sections (only for the active window) >
-let g:airline_skip_empty_sections = 1
-
-" Smartly uniquify buffers names with similar filename, suppressing common parts of paths.
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-
-" Custom setup that removes filetype/whitespace from default vim airline bar
-let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'z', 'warning', 'error']]
-
-" Customize vim airline per filetype
-" 'nerdtree'  - Hide nerdtree status line
-" 'list'      - Only show file type plus current line number out of total
-let g:airline_filetype_overrides = {
-  \ 'list': [ '%y', '%l/%L'],
-  \ }
-
-" Enable powerline fonts
-let g:airline_powerline_fonts = 1
-
-" Enable caching of syntax highlighting groups
-let g:airline_highlighting_cache = 1
-
-" Define custom airline symbols
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-" Don't show git changes to current file in airline
-let g:airline#extensions#hunks#enabled=0
-
-catch
-  echo 'Airline not installed. It should work after running :PlugInstall'
-endtry
-
 " === echodoc === "
 " Enable echodoc on startup
 let g:echodoc#enable_at_startup = 1
-
-" === Signify === "
-let g:signify_sign_delete = '-'
