@@ -109,7 +109,7 @@ else
 endif
 
 " === Fern ==="
-noremap <silent> <leader>n :Fern . -drawer -toggle <CR>
+nnoremap <silent> <leader>n :Fern . -drawer -toggle <CR>
 
 function! s:init_fern() abort
     nmap <buffer> H <Plug>(fern-action-open:split)
