@@ -38,6 +38,9 @@ Plug 'lambdalisue/fern-hijack.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" Floaterm
+Plug 'voldikss/vim-floaterm'
+
 " Misc
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-vinegar'

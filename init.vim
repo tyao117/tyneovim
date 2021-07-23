@@ -3,6 +3,7 @@ source ~/.config/nvim/plugins.vim
 source ~/.tyneovim/plug-config/fern.vim
 source ~/.tyneovim/plug-config/airline.vim
 source ~/.tyneovim/plug-config/signify.vim
+source ~/.tyneovim/plug-config/floaterm.vim
 
 " ============================================================================ "
 " ===                           EDITING OPTIONS                            === "
@@ -51,6 +52,12 @@ set updatetime=50
 
 " Set the column width to be 80 "
 set colorcolumn=80
+
+" vsplit to the right
+set splitright
+
+" split below
+set splitbelow
 
 " ============================================================================ "
 " ===                                UI                                    === "
@@ -146,6 +153,10 @@ map <leader>w <Plug>(easymotion-bd-w)
 
 " === vim-signify ==="
 nmap <silent> <leader>s :SignifyToggle<CR>
+
+" === floaterm ==="
+let g:floaterm_keymap_new = '<Leader>ft'
+let g:floaterm_keymap_toggle = '<Leader>t'
 
 " Allows you to save files you opened without write permissions via sudo
 cmap w!! w !sudo tee %
