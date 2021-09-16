@@ -4,6 +4,7 @@ source ~/.tyneovim/plug-config/fern.vim
 source ~/.tyneovim/plug-config/airline.vim
 source ~/.tyneovim/plug-config/signify.vim
 source ~/.tyneovim/plug-config/floaterm.vim
+source ~/.tyneovim/plug-config/vim-doge.vim
 
 " ============================================================================ "
 " ===                           EDITING OPTIONS                            === "
@@ -44,8 +45,8 @@ set smartindent
 " === Highlight all found entities === "
 set hlsearch
 
-" === Set the cmdheight to be 2 === "
-set cmdheight=2
+" === Set the cmdheight to be 1 === "
+set cmdheight=1
 
 " Set the update time to be faster
 set updatetime=50
@@ -105,7 +106,7 @@ endfunction
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
 
 " Use <c-space> to trigger completion.

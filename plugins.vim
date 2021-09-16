@@ -45,6 +45,9 @@ Plug 'voldikss/vim-floaterm'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-vinegar'
 
+" vim-doge(doc generator)
+Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+
 " If the editor is nvim
 if has('nvim')
 " Intellisense Engine
