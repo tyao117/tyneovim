@@ -83,6 +83,27 @@ set winbl=10
 " ===                             KEY MAPPINGS                             === "
 " ============================================================================ "
 
+" === only yank from the beginning of the cursor === "
+nnoremap Y y$
+
+" === keeping the cursor centered === "
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" === breaks the sequence starts new chain for break points
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+inoremap ( (<c-g>u
+inoremap [ [<c-g>u
+inoremap { {<c-g>u
+
+" === jumplist mutation to go back to original area
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+nnoremap <expr> j (v:count > 5 ? "j'" . v:count : "") . 'j'
+
 " === In Visual Block, Use J and K to move a block of code === "
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
