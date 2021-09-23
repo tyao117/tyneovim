@@ -83,7 +83,7 @@ set winbl=10
 " ===                             KEY MAPPINGS                             === "
 " ============================================================================ "
 
-" === close the buffer and go to the next one === "
+" === close file and go to the next in the buffer in same window === "
 nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " === only yank from the beginning of the cursor === "
