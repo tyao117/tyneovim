@@ -51,10 +51,15 @@ Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 " If the editor is nvim
 if has('nvim')
 " Intellisense Engine
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Fix for CursorHold
     Plug 'antoinemadec/FixCursorHold.nvim'
+" Trying the nvim-lsp
+    Plug 'neovim/nvim-lspconfig'
+" Trying the autocomplete from hrsh7th
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-nvim-lsp'
 endif
 
 call plug#end()

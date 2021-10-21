@@ -5,6 +5,9 @@ source ~/.tyneovim/plug-config/airline.vim
 source ~/.tyneovim/plug-config/signify.vim
 source ~/.tyneovim/plug-config/floaterm.vim
 source ~/.tyneovim/plug-config/vim-doge.vim
+if has('nvim')
+    source ~/.tyneovim/lua-config/nvim-cmp.lua
+endif
 
 " ============================================================================ "
 " ===                           EDITING OPTIONS                            === "
@@ -65,7 +68,7 @@ set splitbelow
 " ============================================================================ "
 
 " Enable true color support
-set termguicolors
+" set termguicolors
 
 " Change vertical split character to be a space (essentially hide it)
 set fillchars+=vert:.
@@ -78,6 +81,23 @@ set noshowmode
 
 " Set floating window to be slightly transparent
 set winbl=10
+
+" Set the completeopt for some stuff
+set completeopt=menu,menuone,noselect
+
+function! MyHighlights() abort
+    autocmd!
+    highlight Pmenu ctermfg=254 ctermbg=241
+    highlight PmenuSel ctermfg=254 ctermbg=136 cterm=bold
+endfunction
+
+augroup MyColors
+    autocmd!
+    autocmd ColorScheme * call MyHighlights()
+augroup END
+
+    highlight Pmenu ctermfg=254 ctermbg=241
+    highlight PmenuSel ctermfg=254 ctermbg=136 cterm=bold
 
 " ============================================================================ "
 " ===                             KEY MAPPINGS                             === "
@@ -118,27 +138,27 @@ vnoremap K :m '<-2<CR>gv=gv
 "   <leader>gj    - Jump to implementation of current symbol
 "   <leader>gs    - Fuzzy search current project symbols
 "   use <tab> for trigger completion and navigate to next complete item
-nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gr <Plug>(coc-references)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nnoremap <silent> <leader>gs :<C-u>CocList -I -N --top symbols<CR>
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+" nmap <silent> <leader>gd <Plug>(coc-definition)
+" nmap <silent> <leader>gr <Plug>(coc-references)
+" nmap <silent> <leader>gi <Plug>(coc-implementation)
+" nnoremap <silent> <leader>gs :<C-u>CocList -I -N --top symbols<CR>
+" 
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction
+" 
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<Tab>" :
+"       \ coc#refresh()
+" 
+" " Use <c-space> to trigger completion.
+" if has('nvim')
+"   inoremap <silent><expr> <c-space> coc#refresh()
+" else
+"   inoremap <silent><expr> <c-@> coc#refresh()
+" endif
 
 " === Fern ==="
 nnoremap <silent> <leader>n :Fern . -drawer -toggle <CR>
@@ -202,7 +222,7 @@ nnoremap <silent> <leader>l :set rnu! number!<CR>
 try
 
 "Close preview window when completion is done.
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+" autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Load custom snippets from snippets folder
 let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
@@ -211,7 +231,7 @@ let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
 let g:neosnippet#enable_conceal_markers = 0
 
 " Set the statusline for coc
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 endtry
 
