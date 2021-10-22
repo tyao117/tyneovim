@@ -49,7 +49,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
 " If the editor is nvim
-if has('nvim')
+if has('nvim-0.5')
 " Intellisense Engine
     " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 

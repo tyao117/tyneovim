@@ -5,7 +5,7 @@ source ~/.tyneovim/plug-config/airline.vim
 source ~/.tyneovim/plug-config/signify.vim
 source ~/.tyneovim/plug-config/floaterm.vim
 source ~/.tyneovim/plug-config/vim-doge.vim
-if has('nvim')
+if has('nvim-0.5')
     source ~/.tyneovim/lua-config/nvim-cmp.lua
 endif
 
