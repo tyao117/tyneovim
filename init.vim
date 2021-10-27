@@ -3,10 +3,12 @@ source ~/.config/nvim/plugins.vim
 source ~/.tyneovim/plug-config/fern.vim
 source ~/.tyneovim/plug-config/airline.vim
 source ~/.tyneovim/plug-config/signify.vim
-source ~/.tyneovim/plug-config/floaterm.vim
 source ~/.tyneovim/plug-config/vim-doge.vim
 if has('nvim-0.5')
     source ~/.tyneovim/lua-config/nvim-cmp.lua
+endif
+if has('nvim')
+    source ~/.tyneovim/plug-config/floaterm.vim
 endif
 
 " ============================================================================ "
@@ -68,7 +70,15 @@ set splitbelow
 " ============================================================================ "
 
 " Enable true color support
-" set termguicolors
+" For tmux versions 2.2 or later (`tmux -V`), you can take out the outer check
+" if (empty($TMUX))
+  if (has("nvim"))
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+" endif
 
 " Change vertical split character to be a space (essentially hide it)
 set fillchars+=vert:.
@@ -87,8 +97,8 @@ set completeopt=menu,menuone,noselect
 
 function! MyHighlights() abort
     autocmd!
-    highlight Pmenu ctermfg=254 ctermbg=241
-    highlight PmenuSel ctermfg=254 ctermbg=136 cterm=bold
+    highlight Pmenu ctermfg=254 ctermbg=DarkGrey guibg=Black
+    highlight PmenuSel ctermfg=DarkGrey ctermbg=34 cterm=bold
 endfunction
 
 augroup MyColors
@@ -96,8 +106,8 @@ augroup MyColors
     autocmd ColorScheme * call MyHighlights()
 augroup END
 
-    highlight Pmenu ctermfg=254 ctermbg=241
-    highlight PmenuSel ctermfg=254 ctermbg=136 cterm=bold
+set background=dark
+colorscheme gruvbox
 
 " ============================================================================ "
 " ===                             KEY MAPPINGS                             === "
