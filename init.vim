@@ -69,6 +69,7 @@ set splitbelow
 " ===                                UI                                    === "
 " ============================================================================ "
 
+
 " Enable true color support
 " For tmux versions 2.2 or later (`tmux -V`), you can take out the outer check
 " if (empty($TMUX))
@@ -108,6 +109,9 @@ augroup END
 
 set background=dark
 colorscheme gruvbox
+
+" enable syntax
+syntax on
 
 " ============================================================================ "
 " ===                             KEY MAPPINGS                             === "
