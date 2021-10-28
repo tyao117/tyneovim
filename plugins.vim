@@ -53,13 +53,20 @@ if has('nvim-0.5')
 " Intellisense Engine
     " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Fix for CursorHold
-    Plug 'antoinemadec/FixCursorHold.nvim'
 " Trying the nvim-lsp
     Plug 'neovim/nvim-lspconfig'
 " Trying the autocomplete from hrsh7th
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
+" Trying out Luasnips
+    Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'L3MON4D3/LuaSnip'
+
 endif
+
+" if has('nvim')
+" " Fix for CursorHold
+"     Plug 'antoinemadec/FixCursorHold.nvim'
+" endif 
 
 call plug#end()

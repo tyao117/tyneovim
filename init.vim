@@ -4,9 +4,7 @@ source ~/.tyneovim/plug-config/fern.vim
 source ~/.tyneovim/plug-config/airline.vim
 source ~/.tyneovim/plug-config/signify.vim
 source ~/.tyneovim/plug-config/vim-doge.vim
-if has('nvim-0.5')
-    source ~/.tyneovim/lua-config/nvim-cmp.lua
-endif
+
 if has('nvim')
     source ~/.tyneovim/plug-config/floaterm.vim
 endif
@@ -94,7 +92,7 @@ set noshowmode
 set winbl=10
 
 " Set the completeopt for some stuff
-set completeopt=menu,menuone,noselect
+set completeopt=menu,menuone,noselect,preview
 
 function! MyHighlights() abort
     autocmd!
@@ -238,17 +236,22 @@ try
 "Close preview window when completion is done.
 " autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
+if has('nvim-0.5')
+    source ~/.tyneovim/lua-config/plugins.vim
+elseif !has('nvim')
 " Load custom snippets from snippets folder
-let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+    let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
 
 " Hide conceal markers
-let g:neosnippet#enable_conceal_markers = 0
+    let g:neosnippet#enable_conceal_markers = 0
 
 " Set the statusline for coc
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-endtry
-
 " === echodoc === "
 " Enable echodoc on startup
-let g:echodoc#enable_at_startup = 1
+    let g:echodoc#enable_at_startup = 1
+endif
+
+endtry
+
