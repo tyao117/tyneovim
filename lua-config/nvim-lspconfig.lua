@@ -38,3 +38,15 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
+local servers = { 'pyright' }
+local coq = require('coq')
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup (
+    coq.lsp_ensure_capabilities({
+        on_attach = on_attach,
+        flags = {
+          debounce_text_changes = 150,
+        }
+    })
+  )
+end

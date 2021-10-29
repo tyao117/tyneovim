@@ -237,6 +237,8 @@ try
 " autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 if has('nvim-0.5')
+" autostart coq autocompletion
+    let g:coq_settings = { 'auto_start': 'shut-up' }
     source ~/.tyneovim/lua-config/plugins.vim
 elseif !has('nvim')
 " Load custom snippets from snippets folder

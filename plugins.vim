@@ -58,6 +58,10 @@ if has('nvim-0.5')
 " Trying the autocomplete from hrsh7th
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
+" Trying the coq_nvim autocomplete
+    Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+    Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+
 " Trying out Luasnips
     Plug 'saadparwaiz1/cmp_luasnip'
     Plug 'L3MON4D3/LuaSnip'
