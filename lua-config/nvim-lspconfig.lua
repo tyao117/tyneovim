@@ -38,15 +38,48 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
-local servers = { 'pyright' }
 local coq = require('coq')
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup (
-    coq.lsp_ensure_capabilities({
-        on_attach = on_attach,
-        flags = {
-          debounce_text_changes = 150,
+local util = require('lspconfig/util')
+local servers = {
+  {
+    name = 'pyright',
+    config = { 
+      settings = {
+        python = {
+          analysis = {
+            autoSearchPaths = true,
+            useLibraryCodeForTypes = false,
+            diagnosticMode = 'openFilesOnly',
+          },
+          venvPath = {".direnv"}, 
+        },
+      },
+      -- update the root detection to be the last thing to be used
+      root_dir = function(fname)
+        local root_files = {
+          'pyproject.toml',
+          'setup.py',
+          'setup.cfg',
+          'requirements.txt',
+          'Pipfile',
+          'pyrightconfig.json',
         }
-    })
+        return util.find_git_ancestor(fname) or util.path.dirname(fname) or util.root_pattern(unpack(root_files))(fname)
+      end,
+    }
+  },
+}
+
+for _, lsp in ipairs(servers) do
+  if lsp.config then
+      lsp.config.on_attach = on_attach
+  else
+      lsp.config = {
+          on_attach = on_attach
+      }
+  end
+
+  nvim_lsp[lsp.name].setup (
+    coq.lsp_ensure_capabilities(lsp.config)
   )
 end
