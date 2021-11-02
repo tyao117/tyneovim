@@ -1,6 +1,7 @@
 -- require'lspconfig'.pyright.setup{}
 
 -- Setup nvim-cmp.
+vim.lsp.set_log_level("debug")
 local nvim_lsp = require('lspconfig')
 
 -- add additional capabilities supported by nvim-cmp
@@ -41,6 +42,7 @@ end
 local coq = require('coq')
 local util = require('lspconfig/util')
 local servers = {
+  -- pyright
   {
     name = 'pyright',
     config = { 
@@ -48,7 +50,7 @@ local servers = {
         python = {
           analysis = {
             autoSearchPaths = true,
-            useLibraryCodeForTypes = false,
+            useLibraryCodeForTypes = true,
             diagnosticMode = 'openFilesOnly',
           },
           venvPath = {".direnv"}, 
@@ -65,7 +67,23 @@ local servers = {
           'pyrightconfig.json',
         }
         return util.find_git_ancestor(fname) or util.path.dirname(fname) or util.root_pattern(unpack(root_files))(fname)
-      end,
+      end
+    }
+  }, 
+  -- gopls
+  {
+    name = 'gopls',
+    config = {
+      settings = {
+        gopls = {
+          experimentalPostfixCompletions = true,
+          analyses = {
+            unusedparams = true,
+     	    shadow = true,
+          },
+          staticcheck = true,
+        },
+	  },
     }
   },
 }
