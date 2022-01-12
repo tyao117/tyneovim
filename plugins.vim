@@ -72,6 +72,9 @@ if has('nvim-0.5')
     Plug 'saadparwaiz1/cmp_luasnip'
     Plug 'L3MON4D3/LuaSnip'
 
+" Treesitter
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 endif
 
 " if has('nvim')

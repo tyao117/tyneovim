@@ -109,7 +109,7 @@ set background=dark
 colorscheme gruvbox
 
 " enable syntax
-syntax on
+" syntax on
 
 " ============================================================================ "
 " ===                             KEY MAPPINGS                             === "
@@ -154,17 +154,17 @@ vnoremap K :m '<-2<CR>gv=gv
 " nmap <silent> <leader>gr <Plug>(coc-references)
 " nmap <silent> <leader>gi <Plug>(coc-implementation)
 " nnoremap <silent> <leader>gs :<C-u>CocList -I -N --top symbols<CR>
-" 
+"
 " function! s:check_back_space() abort
 "   let col = col('.') - 1
 "   return !col || getline('.')[col - 1]  =~ '\s'
 " endfunction
-" 
+"
 " inoremap <silent><expr> <TAB>
 "       \ pumvisible() ? "\<C-n>" :
 "       \ <SID>check_back_space() ? "\<Tab>" :
 "       \ coc#refresh()
-" 
+"
 " " Use <c-space> to trigger completion.
 " if has('nvim')
 "   inoremap <silent><expr> <c-space> coc#refresh()
@@ -196,7 +196,7 @@ augroup END
 
 " === vim-better-whitespace === "
 "   <leader>y - Automatically remove trailing whitespace
-nmap <leader>y :StripWhitespace<CR>
+nmap <leader>y :%s/\s\+$//e<CR>
 
 " === Search shorcuts === "
 "   <leader>h - Find and replace
