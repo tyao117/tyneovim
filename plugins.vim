@@ -27,12 +27,18 @@ Plug 'psliwka/vim-smoothie'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 
+" Git Tree branching
+Plug 'rbong/vim-flog'
+
 " Helping with mappings
 Plug 'liuchengxu/vim-which-key'
 
 " File Tree
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/fern-hijack.vim'
+if has('nvim')
+    Plug 'antoinemadec/FixCursorHold.nvim'
+endif
 
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
