@@ -75,6 +75,9 @@ if has('nvim-0.5')
 " Treesitter
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+" trouble for diagnostics
+    Plug 'folke/trouble.nvim'
+
 endif
 
 " if has('nvim')

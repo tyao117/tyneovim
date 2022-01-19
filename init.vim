@@ -9,6 +9,13 @@ if has('nvim')
     source ~/.tyneovim/plug-config/floaterm.vim
 endif
 
+function! GetNVimVersion()
+    redir => s
+    silent! version
+    redir END
+    return matchstr(s, 'NVIM v\zs[^\n]*')
+endfunction
+
 " ============================================================================ "
 " ===                           EDITING OPTIONS                            === "
 " ============================================================================ "
@@ -108,8 +115,10 @@ augroup END
 set background=dark
 colorscheme gruvbox
 
-" enable syntax
-" syntax on
+if !has('nvim-0.5')
+    " enable syntax
+    syntax on
+endif
 
 " ============================================================================ "
 " ===                             KEY MAPPINGS                             === "
@@ -117,6 +126,20 @@ colorscheme gruvbox
 
 " === close file and go to the next in the buffer in same window === "
 nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+
+" === quickfix list 
+" Go to the prev item in list
+nnoremap <leader>q[ :cprev<CR>
+
+" Go to the prev item in list
+nnoremap <leader>q] :cnext<CR>
+
+" Show the quickfix window
+nnoremap <leader>qo :copen<CR>
+
+" Hide the quickfix window
+nnoremap <leader>qc :cclose<CR>
+
 
 " === only yank from the beginning of the cursor === "
 nnoremap Y y$
@@ -214,6 +237,15 @@ nmap <silent> <leader>s :SignifyToggle<CR>
 " === floaterm ==="
 let g:floaterm_keymap_new = '<Leader>ft'
 let g:floaterm_keymap_toggle = '<Leader>t'
+
+" === Trouble ==="
+if has('nvim-0.5')
+    nnoremap <leader>xx <cmd>TroubleToggle<cr>
+    nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+    nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+    nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+    nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+endif
 
 " Allows you to save files you opened without write permissions via sudo
 cmap w!! w !sudo tee %

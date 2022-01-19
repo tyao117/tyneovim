@@ -7,6 +7,7 @@ require'nvim-treesitter.configs'.setup {
       "lua",
       "make",
       "python",
+      "vim",
       "yaml",
   },
 
