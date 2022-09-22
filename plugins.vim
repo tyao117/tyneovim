@@ -1,9 +1,12 @@
 call plug#begin('~/.vim/plugged')
 " Themes
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'tomasiser/vim-code-dark'
 Plug 'gruvbox-community/gruvbox'
+
+" Confirm quit
+" Plug 'arp242/confirm_quit.vim'
 
 " Start menu
 Plug 'mhinz/vim-startify'
@@ -51,6 +54,9 @@ Plug 'voldikss/vim-floaterm'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-vinegar'
 
+" Allows you to highlight and surrond words with quotes
+Plug 'tpope/vim-surround'
+
 " vim-doge(doc generator)
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
@@ -62,14 +68,14 @@ if has('nvim-0.5')
 " Trying the nvim-lsp
     Plug 'neovim/nvim-lspconfig'
 " Trying the autocomplete from hrsh7th
-    Plug 'hrsh7th/nvim-cmp'
-    Plug 'hrsh7th/cmp-nvim-lsp'
+"   Plug 'hrsh7th/nvim-cmp'
+"   Plug 'hrsh7th/cmp-nvim-lsp'
+"   Plug 'saadparwaiz1/cmp_luasnip'
 " Trying the coq_nvim autocomplete
     Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
     Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 
 " Trying out Luasnips
-    Plug 'saadparwaiz1/cmp_luasnip'
     Plug 'L3MON4D3/LuaSnip'
 
 " Treesitter

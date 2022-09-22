@@ -1,7 +1,7 @@
 " Get the plugins from my plugins file
 source ~/.config/nvim/plugins.vim
 source ~/.tyneovim/plug-config/fern.vim
-source ~/.tyneovim/plug-config/airline.vim
+" source ~/.tyneovim/plug-config/airline.vim
 source ~/.tyneovim/plug-config/signify.vim
 source ~/.tyneovim/plug-config/vim-doge.vim
 
@@ -59,16 +59,11 @@ set hlsearch
 set cmdheight=1
 
 " Set the update time to be faster
-set updatetime=50
+set updatetime=66
 
 " Set the column width to be 80 "
 set colorcolumn=80
 
-" vsplit to the right
-set splitright
-
-" split below
-set splitbelow
 
 " ============================================================================ "
 " ===                                UI                                    === "
@@ -89,8 +84,11 @@ set splitbelow
 " Change vertical split character to be a space (essentially hide it)
 set fillchars+=vert:.
 
-" Set preview window to appear at bottom
+" Set preview window to split to the bottom
 set splitbelow
+
+" Set preview windoe to vsplit to the right
+set splitright
 
 " Don't display mode in command line (airilne already shows it)
 set noshowmode
@@ -101,20 +99,101 @@ set winbl=10
 " Set the completeopt for some stuff
 set completeopt=menu,menuone,noselect,preview
 
-function! MyHighlights() abort
-    autocmd!
-    highlight Pmenu ctermfg=254 ctermbg=DarkGrey guibg=Black
-    highlight PmenuSel ctermfg=DarkGrey ctermbg=34 cterm=bold
-endfunction
-
-augroup MyColors
-    autocmd!
-    autocmd ColorScheme * call MyHighlights()
-augroup END
+" function! MyHighlights() abort
+"     autocmd!
+"     highlight Pmenu ctermfg=254 ctermbg=DarkGrey guibg=Black
+"     highlight PmenuSel ctermfg=DarkGrey ctermbg=34 cterm=bold
+" endfunction
+" 
+" augroup MyColors
+"     autocmd!
+"     autocmd ColorScheme * call MyHighlights()
+" augroup END
 
 set background=dark
 colorscheme gruvbox
 
+" === Custom Status Line === "
+set laststatus=2
+set statusline=
+set statusline+=%2*
+set statusline+=%{StatuslineMode()}
+set statusline+=%1*
+set statusline+=\ 
+set statusline+=<
+set statusline+=<
+set statusline+=\ 
+set statusline+=%f
+set statusline+=\ 
+set statusline+=>
+set statusline+=>
+set statusline+=%=
+set statusline+=%m
+set statusline+=%h
+set statusline+=%r
+set statusline+=\ 
+set statusline+=%3*
+set statusline+=%{b:gitbranch}
+set statusline+=%1*
+set statusline+=\ 
+set statusline+=%4*
+set statusline+=%F
+set statusline+=:
+set statusline+=:
+set statusline+=%5*
+set statusline+=%l
+set statusline+=/
+set statusline+=%L
+set statusline+=%1*
+set statusline+=|
+set statusline+=%y
+hi User2 ctermbg=lightgreen ctermfg=black guibg=lightgreen guifg=black
+hi User1 ctermbg=black ctermfg=white guibg=black guifg=white
+hi User3 ctermbg=black ctermfg=lightblue guibg=black guifg=lightblue
+hi User4 ctermbg=black ctermfg=lightgreen guibg=black guifg=lightgreen
+hi User5 ctermbg=black ctermfg=magenta guibg=black guifg=magenta
+
+function! StatuslineMode()
+  let l:mode=mode()
+  if l:mode==#"n"
+    return "NORMAL"
+  elseif l:mode==?"v"
+    return "VISUAL"
+  elseif l:mode==#"i"
+    return "INSERT"
+  elseif l:mode==#"R"
+    return "REPLACE"
+  elseif l:mode==?"s"
+    return "SELECT"
+  elseif l:mode==#"t"
+    return "TERMINAL"
+  elseif l:mode==#"c"
+    return "COMMAND"
+  elseif l:mode==#"!"
+    return "SHELL"
+  endif
+endfunction
+
+function! StatuslineGitBranch()
+  let b:gitbranch=""
+  if &modifiable
+    try
+      let l:dir=expand('%:p:h')
+      let l:gitrevparse = system("git -C ".l:dir." rev-parse --abbrev-ref HEAD")
+      if !v:shell_error
+        let b:gitbranch="(".substitute(l:gitrevparse, '\n', '', 'g').") "
+      endif
+    catch
+    endtry
+  endif
+endfunction
+
+augroup GetGitBranch
+  autocmd!
+  autocmd VimEnter,WinEnter,BufEnter * call StatuslineGitBranch()
+augroup END
+
+" enable syntax
 if !has('nvim-0.5')
     " enable syntax
     syntax on
@@ -123,6 +202,9 @@ endif
 " ============================================================================ "
 " ===                             KEY MAPPINGS                             === "
 " ============================================================================ "
+
+" === change the leader key ==="
+" let mapleader = "\<BS>"
 
 " === close file and go to the next in the buffer in same window === "
 nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
@@ -166,7 +248,6 @@ nnoremap <expr> j (v:count > 5 ? "j'" . v:count : "") . 'j'
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-
 " === coc.nvim === "
 "   <leader>gd    - Jump to definition of current symbol
 "   <leader>gr    - Jump to references of current symbol
@@ -199,9 +280,9 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <silent> <leader>n :Fern . -drawer -toggle <CR>
 
 function! s:init_fern() abort
-    nmap <buffer> H <Plug>(fern-action-open:split)
-    nmap <buffer> V <Plug>(fern-action-open:vsplit)
-    nmap <buffer> R <Plug>(fern-action-rename)
+    nmap <buffer> <C-h> <Plug>(fern-action-open:split)
+    nmap <buffer> <C-v> <Plug>(fern-action-open:vsplit)
+    nmap <buffer> <C-r> <Plug>(fern-action-rename)
     nmap <buffer> M <Plug>(fern-action-move)
     nmap <buffer> C <Plug>(fern-action-copy)
     nmap <buffer> N <Plug>(fern-action-new-path)
@@ -270,7 +351,8 @@ try
 
 if has('nvim-0.5')
 " autostart coq autocompletion
-    let g:coq_settings = { 'auto_start': 'shut-up' }
+    " coq_settings must be set before anything else
+    source ~/.tyneovim/plug-config/coq_nvim.vim
     source ~/.tyneovim/lua-config/plugins.vim
 elseif !has('nvim')
 " Load custom snippets from snippets folder
