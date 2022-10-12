@@ -44,6 +44,9 @@ function M.setup()
     -- Load only when require
     use { "nvim-lua/plenary.nvim", module = "plenary" }
 
+    -- LuaSnip
+    use({"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"})
+
     -- Notification
     use {
       "rcarriga/nvim-notify",
@@ -187,7 +190,9 @@ function M.setup()
 
     -- FZF
     -- use { "junegunn/fzf", run = "./install --all", event = "VimEnter" } -- You don't need to install this if you already have fzf installed
-    -- use { "junegunn/fzf.vim", event = "BufEnter" }
+    use {
+      "junegunn/fzf.vim", event = "BufEnter"
+    }
 
     -- FZF Lua
     use {
@@ -229,6 +234,8 @@ function M.setup()
       end,
       disable = true,
     }
+
+    -- Telescope
     use { "nvim-telescope/telescope.nvim", module = "telescope", as = "telescope" }
 
     -- Completion
@@ -322,6 +329,11 @@ function M.setup()
         "williamboman/nvim-lsp-installer",
         "ray-x/lsp_signature.nvim",
       },
+    }
+
+    -- LSP_Signature
+    use {
+      "ray-x/lsp_signature.nvim",
     }
 
     -- Bootstrap Neovim
