@@ -64,6 +64,15 @@ function M.setup()
       end,
     }
 
+    -- ToggleTerm
+    use {
+      "akinsho/toggleterm.nvim",
+      tag = '*',
+      config = function()
+        require("config.toggleterm").setup()
+    end,
+    }
+
     -- Startup screen
     use {
       "goolord/alpha-nvim",
@@ -164,14 +173,16 @@ function M.setup()
       end,
       wants = "nvim-web-devicons",
     }
+
+    -- nvim navic
     use {
-      "SmiteshP/nvim-gps",
-      requires = "nvim-treesitter/nvim-treesitter",
-      module = "nvim-gps",
-      wants = "nvim-treesitter",
+      "SmiteshP/nvim-navic",
+      requires = "neovim/nvim-lspconfig",
+      module = "nvim-navic",
       config = function()
-        require("nvim-gps").setup()
+        require("nvim-navic").setup()
       end,
+      wants = "nvim-lspconfig",
     }
 
     -- Treesitter
@@ -190,9 +201,7 @@ function M.setup()
 
     -- FZF
     -- use { "junegunn/fzf", run = "./install --all", event = "VimEnter" } -- You don't need to install this if you already have fzf installed
-    use {
-      "junegunn/fzf.vim", event = "BufEnter"
-    }
+    -- use { "junegunn/fzf.vim", event = "BufEnter" }
 
     -- FZF Lua
     use {

@@ -41,6 +41,7 @@ lsp_signature.setup {
   },
 }
 
+local navic = require "nvim-navic"
 local function on_attach(client, bufnr)
   -- Enable completion triggered by <C-X><C-O>
   -- See `:help omnifunc` and `:help ins-completion` for more information.
@@ -49,6 +50,11 @@ local function on_attach(client, bufnr)
   -- Use LSP as the handler for formatexpr.
   -- See `:help formatexpr` for more information.
   vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+
+  -- Allow navic to attach to the lsp
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
 
   -- Configure key mappings
   require("config.lsp.keymaps").setup(client, bufnr)

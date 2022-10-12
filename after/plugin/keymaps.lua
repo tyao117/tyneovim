@@ -4,7 +4,6 @@ local expr_opts = { noremap = true, expr = true, silent = true }
 
 -- Better escape using jk in insert and terminal mode
 keymap("i", "jk", "<ESC>", default_opts)
-keymap("t", "jk", "<C-\\><C-n>", default_opts)
 
 -- Center search results
 keymap("n", "n", "nzz", default_opts)
@@ -37,3 +36,7 @@ keymap("n", "<Left>", ":vertical resize +1<CR>", default_opts)
 keymap("n", "<Right>", ":vertical resize -1<CR>", default_opts)
 keymap("n", "<Up>", ":resize -1<CR>", default_opts)
 keymap("n", "<Down>", ":resize +1<CR>", default_opts)
+
+-- Toggle Term
+keymap("n", "<leader>t", ":ToggleTerm<CR>", default_opts)
+keymap("t", "<ESC>", "<C-\\><C-n>", default_opts)
