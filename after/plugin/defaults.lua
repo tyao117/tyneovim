@@ -22,6 +22,9 @@ opt.clipboard = "unnamedplus" -- Access system clipboard
 opt.timeoutlen = 300 --	Time in milliseconds to wait for a mapped sequence to complete.
 opt.showmode = false -- Do not need to show the mode. We use the statusline instead.
 
+-- vim config interpreter
+vim.g.python3_host_prog='~/nvim/bin/python3'
+
 -- Highlight on yank
 vim.cmd [[
   augroup YankHighlight
