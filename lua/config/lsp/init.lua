@@ -1,7 +1,13 @@
 local M = {}
 
 local servers = {
-  gopls = {},
+  gopls = {
+    analyses = {
+      unusedparams = true,
+      unreachable = true,
+    },
+    staticcheck = true,
+  },
   html = {},
   jsonls = {},
   pyright = {},

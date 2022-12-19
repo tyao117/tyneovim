@@ -64,6 +64,32 @@ function M.setup()
       end,
     }
 
+    -- Treesitter
+    use {
+      "nvim-treesitter/nvim-treesitter",
+      opt = true,
+      event = "BufRead",
+      run = ":TSUpdate",
+      config = function()
+        require("config.treesitter").setup()
+      end,
+      requires = {
+        { "nvim-treesitter/nvim-treesitter-textobjects" },
+      },
+    }
+
+    -- nvim navic
+    use {
+      "SmiteshP/nvim-navic",
+      requires = "neovim/nvim-lspconfig",
+      module = "nvim-navic",
+      config = function()
+        require("nvim-navic").setup()
+      end,
+      wants = "nvim-lspconfig",
+    }
+
+
     -- ToggleTerm
     use {
       "akinsho/toggleterm.nvim",
@@ -172,31 +198,6 @@ function M.setup()
         require("config.lualine").setup()
       end,
       wants = "nvim-web-devicons",
-    }
-
-    -- nvim navic
-    use {
-      "SmiteshP/nvim-navic",
-      requires = "neovim/nvim-lspconfig",
-      module = "nvim-navic",
-      config = function()
-        require("nvim-navic").setup()
-      end,
-      wants = "nvim-lspconfig",
-    }
-
-    -- Treesitter
-    use {
-      "nvim-treesitter/nvim-treesitter",
-      opt = true,
-      event = "BufRead",
-      run = ":TSUpdate",
-      config = function()
-        require("config.treesitter").setup()
-      end,
-      requires = {
-        { "nvim-treesitter/nvim-treesitter-textobjects" },
-      },
     }
 
     -- FZF

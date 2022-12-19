@@ -21,6 +21,9 @@ opt.signcolumn = "yes" -- Always show sign column
 opt.clipboard = "unnamedplus" -- Access system clipboard
 opt.timeoutlen = 300 --	Time in milliseconds to wait for a mapped sequence to complete.
 opt.showmode = false -- Do not need to show the mode. We use the statusline instead.
+opt.tabstop = 4 -- Set how wide the tab should be 
+opt.shiftwidth = 4
+-- opt.listchars = { extends='◣', precedes='◢', eol='#', trail='·', tab='▷', nbsp='○' }
 
 -- vim config interpreter
 vim.g.python3_host_prog='~/nvim/bin/python3'
