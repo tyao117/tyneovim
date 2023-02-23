@@ -3,6 +3,7 @@ local M = {}
 function M.setup(servers, options)
   local lspconfig = require "lspconfig"
 
+  -- Package installation folder
   require("mason-lspconfig").setup {
     ensure_installed = vim.tbl_keys(servers),
     automatic_isntallation = false,

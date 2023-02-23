@@ -25,10 +25,8 @@ function M.on_attach(client, bufnr)
   -- See `:help formatexpr` for more information.
   vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
-  -- Allow navic to attach to the lsp
-  if client.server_capabilities.documentSymbolProvider then
-    navic.attach(client, bufnr)
-  end
+  -- Configure formatting
+  require("config.lsp.null-ls.formatters").setup(client, bufnr)
 
   -- Configure key mappings
   require("config.lsp.keymaps").setup(client, bufnr)
@@ -68,6 +66,10 @@ local opts = {
 require("config.lsp.handlers").setup()
 
 function M.setup()
+  -- null-ls
+  require("config.lsp.null-ls").setup(opts)
+
+  -- Installer
   require("config.lsp.mason-installer").setup(servers, opts)
 end
 

@@ -303,6 +303,7 @@ function M.setup()
         "neovim/nvim-lspconfig",
       }
     }
+
     -- Mason-lspConfig
     use {
       "williamboman/mason-lspconfig.nvim",
@@ -310,6 +311,12 @@ function M.setup()
         "williamboman/mason.nvim",
         "neovim/nvim-lspconfig",
       }
+    }
+
+    -- Mason-null-ls
+    use {
+      "jay-babu/mason-null-ls.nvim",
+      opt = false,
     }
 
     -- Auto pairs
@@ -348,14 +355,24 @@ function M.setup()
       "neovim/nvim-lspconfig",
       opt = true,
       event = "BufReadPre",
-      wants = { "mason-lspconfig.nvim", "lsp_signature.nvim", "cmp-nvim-lsp" },  -- for nvim-cmp
+      wants = {
+        "mason.nvim",
+        "mason-lspconfig.nvim",
+        "lsp_signature.nvim",
+        "cmp-nvim-lsp",
+        "null-ls.nvim",
+        "mason-null-ls.nvim",
+      },  -- for nvim-cmp
       -- wants = { "nvim-lsp-installer", "lsp_signature.nvim", "coq_nvim" },  -- for coq.nvim
       config = function()
         require("config.lsp").setup()
       end,
       requires = {
-        -- "williamboman/nvim-lsp-installer",
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
         "ray-x/lsp_signature.nvim",
+        "jose-elias-alvarez/null-ls.nvim",
+        "jay-babu/mason-null-ls.nvim",
       },
     }
 
