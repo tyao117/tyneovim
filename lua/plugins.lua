@@ -58,12 +58,13 @@ function M.setup()
     }
 
     -- Colorscheme
-    -- use {
-    --   "sainnhe/everforest",
-    --   config = function()
-    --     vim.cmd "colorscheme everforest"
-    --   end,
-    -- }
+    use {
+      "sainnhe/gruvbox-material",
+      config = function()
+        vim.cmd "colorscheme gruvbox-material"
+      end,
+    }
+
 
     -- Treesitter
     use {
@@ -184,6 +185,7 @@ function M.setup()
     -- Status line
     use {
       "nvim-lualine/lualine.nvim",
+      event = "VimEnter",
       after = "nvim-treesitter",
       config = function()
         require("config.lualine").setup()
@@ -314,6 +316,7 @@ function M.setup()
     use {
       "windwp/nvim-autopairs",
       wants = "nvim-treesitter",
+      opt = true,
       module = { "nvim-autopairs.completion.cmp", "nvim-autopairs" },
       config = function()
         require("config.autopairs").setup()
@@ -334,6 +337,7 @@ function M.setup()
     -- End wise
     use {
       "RRethy/nvim-treesitter-endwise",
+      opt = true,
       wants = "nvim-treesitter",
       event = "InsertEnter",
       disable = false,
