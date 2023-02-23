@@ -68,11 +68,14 @@ function M.setup()
     -- Treesitter
     use {
       "nvim-treesitter/nvim-treesitter",
+      event = "BufReadPre",
+      run = ":TSUpdate",
       config = function()
         require("config.treesitter").setup()
       end,
       requires = {
-        { "nvim-treesitter/nvim-treesitter-textobjects" },
+        { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufReadPre" },
+        { "windwp/nvim-ts-autotag", event = "InsertEnter"},
       },
     }
 
@@ -301,9 +304,6 @@ function M.setup()
     -- Mason-lspConfig
     use {
       "williamboman/mason-lspconfig.nvim",
-      config = function()
-        require("config.mason-lspconfig").setup()
-      end,
       requires = {
         "williamboman/mason.nvim",
         "neovim/nvim-lspconfig",
@@ -323,8 +323,9 @@ function M.setup()
     -- Auto tag
     use {
       "windwp/nvim-ts-autotag",
+      opt = true,
       wants = "nvim-treesitter",
-      -- event = "InsertEnter",
+      event = "InsertEnter",
       config = function()
         require("nvim-ts-autotag").setup { enable = true }
       end,

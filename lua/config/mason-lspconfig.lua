@@ -6,6 +6,7 @@ function M.setup()
   require('mason-lspconfig').setup {
     ensure_installed = servers,
   }
+end
 
 return M
   

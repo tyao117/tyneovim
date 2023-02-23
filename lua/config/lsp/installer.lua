@@ -1,34 +1,26 @@
-local lsp_installer_servers = require "nvim-lsp-installer.servers"
-local utils = require "utils"
-
 local M = {}
 
 function M.setup(servers, options)
-  for server_name, _ in pairs(servers) do
-    local server_available, server = lsp_installer_servers.get_server(server_name)
+  local lspconfig = require "lspconfig"
+  require("mason-lspconfig").setup{
+    ensure_installed = vim.tbl_keys(servers),
+    automatic_installation = false,
+  }
+  require("mason-lspconfig").setup_handlers {
+    function(server_name)
+      local opts = vim.tbl_deep_extend("force", options, servers[server_name] or {})
+      lspconfig[server_name].setup { opts }
+    end,
+    ["tsserver"] = function()
+      local opts = vim.tbl_deep_extend("force", options, servers["tsserver"] or {})
+      require("typescript").setup {
+        disable_commands = false,
+        debug = false,
+        server = opts,
+      }
+    end,
+  }
 
-    if server_available then
-      server:on_ready(function()
-        local opts = vim.tbl_deep_extend("force", options, servers[server.name] or {})
-
-        -- if server.name == "sumneko_lua" then
-        --   opts = require("lua-dev").setup { lspconfig = opts }
-        -- end
-
-          -- Used for COQ
-          -- local coq = require "coq"
-          -- server:setup(coq.lsp_ensure_capabilities(opts))
-          server:setup(opts)
-      end)
-
-      if not server:is_installed() then
-        utils.info("Installing " .. server.name)
-        server:install()
-      end
-    else
-      utils.error(server)
-    end
-  end
 end
 
 return M

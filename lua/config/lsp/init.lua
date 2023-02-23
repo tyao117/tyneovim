@@ -16,16 +16,7 @@ local servers = {
   vimls = {},
 }
 
-local lsp_signature = require "lsp_signature"
-lsp_signature.setup {
-  bind = true,
-  handler_opts = {
-    border = "rounded",
-  },
-}
-
-local navic = require "nvim-navic"
-local function on_attach(client, bufnr)
+function M.on_attach(client, bufnr)
   -- Enable completion triggered by <C-X><C-O>
   -- See `:help omnifunc` and `:help ins-completion` for more information.
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -41,13 +32,33 @@ local function on_attach(client, bufnr)
 
   -- Configure key mappings
   require("config.lsp.keymaps").setup(client, bufnr)
+
+  -- nvim-navic
+  if client.server_capabilities.documentSymbolProvider then
+    local navic = "nvim-navic"
+    navic.attach(client, bufnr)
+  end
 end
 
--- local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()) -- for nvim-cmp
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+}
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
+}
+
+M.capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities) -- for nvim-cmp
 
 local opts = {
-  on_attach = on_attach,
-  -- capabilities = capabilities, -- for nvim-cmp
+  on_attach = M.on_attach,
+  capabilities = M.capabilities,
   flags = {
     debounce_text_changes = 150,
   },

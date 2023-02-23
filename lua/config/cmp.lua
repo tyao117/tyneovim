@@ -11,7 +11,7 @@ function M.setup()
 
   cmp.setup {
     completion = { completeopt = "menu,noinsert,longest,preview", keyword_length = 2 },
-    experimental = { native_menu = false, ghost_text = false },
+    -- experimental = { native_menu = false, ghost_text = false },
     snippet = {
       expand = function(args)
         require("luasnip").lsp_expand(args.body)
