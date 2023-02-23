@@ -53,23 +53,21 @@ function M.setup()
       event = "VimEnter",
       config = function()
         vim.notify = require "notify"
+        require("config.notify").setup()
       end,
     }
 
     -- Colorscheme
-    use {
-      "sainnhe/everforest",
-      config = function()
-        vim.cmd "colorscheme everforest"
-      end,
-    }
+    -- use {
+    --   "sainnhe/everforest",
+    --   config = function()
+    --     vim.cmd "colorscheme everforest"
+    --   end,
+    -- }
 
     -- Treesitter
     use {
       "nvim-treesitter/nvim-treesitter",
-      opt = true,
-      event = "BufRead",
-      run = ":TSUpdate",
       config = function()
         require("config.treesitter").setup()
       end,
@@ -88,7 +86,6 @@ function M.setup()
       end,
       wants = "nvim-lspconfig",
     }
-
 
     -- ToggleTerm
     use {
@@ -109,15 +106,6 @@ function M.setup()
 
     -- Better Netrw
     use { "tpope/vim-vinegar" }
-
-    -- Git
-    use {
-      "TimUntersberger/neogit",
-      cmd = "Neogit",
-      config = function()
-        require("config.neogit").setup()
-      end,
-    }
 
     -- WhichKey
     use {
@@ -156,7 +144,7 @@ function M.setup()
     }
 
     -- Better surround
-    use { "tpope/vim-surround", event = "InsertEnter" }
+    use { "tpope/vim-surround", event = "InsertEnter", disable = true }
 
     -- Motions
     use { "andymass/vim-matchup", event = "CursorMoved" }
@@ -248,7 +236,7 @@ function M.setup()
     -- Telescope
     use { "nvim-telescope/telescope.nvim", module = "telescope", as = "telescope" }
 
-    -- Completion
+    -- Auto Completion
     use {
       "ms-jpq/coq_nvim",
       branch = "coq",
@@ -262,9 +250,10 @@ function M.setup()
         { "ms-jpq/coq.artifacts", branch = "artifacts" },
         { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
       },
-      disable = false,
+      disable = true,
     }
 
+    -- Autocomplete
     use {
       "hrsh7th/nvim-cmp",
       event = "InsertEnter",
@@ -293,8 +282,32 @@ function M.setup()
           end,
         },
         "rafamadriz/friendly-snippets",
+        "folke/neodev.nvim",
       },
-      disable = true,
+      disable = false,
+    }
+
+    -- Mason
+    use {
+      "williamboman/mason.nvim",
+      config = function()
+        require("mason").setup()
+      end,
+      requires = {
+        "williamboman/mason-lspconfig.nvim",
+        "neovim/nvim-lspconfig",
+      }
+    }
+    -- Mason-lspConfig
+    use {
+      "williamboman/mason-lspconfig.nvim",
+      config = function()
+        require("config.mason-lspconfig").setup()
+      end,
+      requires = {
+        "williamboman/mason.nvim",
+        "neovim/nvim-lspconfig",
+      }
     }
 
     -- Auto pairs
@@ -311,7 +324,7 @@ function M.setup()
     use {
       "windwp/nvim-ts-autotag",
       wants = "nvim-treesitter",
-      event = "InsertEnter",
+      -- event = "InsertEnter",
       config = function()
         require("nvim-ts-autotag").setup { enable = true }
       end,
@@ -330,13 +343,13 @@ function M.setup()
       "neovim/nvim-lspconfig",
       opt = true,
       event = "BufReadPre",
-      -- wants = { "nvim-lsp-installer", "lsp_signature.nvim", "cmp-nvim-lsp" },  -- for nvim-cmp
-      wants = { "nvim-lsp-installer", "lsp_signature.nvim", "coq_nvim" },  -- for coq.nvim
+      wants = { "mason-lspconfig.nvim", "lsp_signature.nvim", "cmp-nvim-lsp" },  -- for nvim-cmp
+      -- wants = { "nvim-lsp-installer", "lsp_signature.nvim", "coq_nvim" },  -- for coq.nvim
       config = function()
         require("config.lsp").setup()
       end,
       requires = {
-        "williamboman/nvim-lsp-installer",
+        -- "williamboman/nvim-lsp-installer",
         "ray-x/lsp_signature.nvim",
       },
     }

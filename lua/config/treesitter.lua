@@ -3,14 +3,15 @@ local M = {}
 function M.setup()
   require("nvim-treesitter.configs").setup {
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-    ensure_installed = { "dockerfile", "go", "python" },
+    ensure_installed = { "dockerfile", "go", "gomod", "python" },
 
     -- Install languages synchronously (only applied to `ensure_installed`)
-    sync_install = false,
+    sync_install = true,
 
     highlight = {
       -- `false` will disable the whole extension
       enable = true,
+      additional_vim_regex_highlighting = false,
     },
 
     incremental_selection = {

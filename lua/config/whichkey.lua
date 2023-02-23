@@ -39,7 +39,7 @@ function M.setup()
       e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
     },
 
-    z = {
+    p = {
       name = "Packer",
       c = { "<cmd>PackerCompile<cr>", "Compile" },
       i = { "<cmd>PackerInstall<cr>", "Install" },
@@ -47,11 +47,6 @@ function M.setup()
       s = { "<cmd>PackerSync<cr>", "Sync" },
       S = { "<cmd>PackerStatus<cr>", "Status" },
       u = { "<cmd>PackerUpdate<cr>", "Update" },
-    },
-
-    g = {
-      name = "Git",
-      s = { "<cmd>Neogit<CR>", "Status" },
     },
   }
 
