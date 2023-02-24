@@ -13,7 +13,6 @@ local sources = {
   b.formatting.stylua,
   b.formatting.golines,
   b.formatting.autopep8,
-  b.formatting.shellharden,
 
   -- hover
   b.hover.dictionary,

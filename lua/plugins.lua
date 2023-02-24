@@ -45,7 +45,7 @@ function M.setup()
     use { "nvim-lua/plenary.nvim", module = "plenary" }
 
     -- LuaSnip
-    use({"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"})
+    use { "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*" }
 
     -- Notification
     use {
@@ -58,13 +58,18 @@ function M.setup()
     }
 
     -- Colorscheme
+    -- use {
+    --   "sainnhe/gruvbox-material",
+    --   config = function()
+    --     vim.cmd "colorscheme gruvbox-material"
+    --   end,
+    -- }
     use {
-      "sainnhe/gruvbox-material",
+      "tanvirtin/monokai.nvim",
       config = function()
-        vim.cmd "colorscheme gruvbox-material"
+        require("monokai").setup { palette = require("monokai").pro }
       end,
     }
-
 
     -- Treesitter
     use {
@@ -76,7 +81,7 @@ function M.setup()
       end,
       requires = {
         { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufReadPre" },
-        { "windwp/nvim-ts-autotag", event = "InsertEnter"},
+        { "windwp/nvim-ts-autotag", event = "InsertEnter" },
       },
     }
 
@@ -94,10 +99,10 @@ function M.setup()
     -- ToggleTerm
     use {
       "akinsho/toggleterm.nvim",
-      tag = '*',
+      tag = "*",
       config = function()
         require("config.toggleterm").setup()
-    end,
+      end,
     }
 
     -- Startup screen
@@ -145,6 +150,12 @@ function M.setup()
       config = function()
         require("Comment").setup {}
       end,
+    }
+
+    -- Trying out Grapple(Tagging and Moving)
+    use {
+      "cbochs/grapple.nvim",
+      requires = { "nvim-lua/plenary.nvim" },
     }
 
     -- Better surround
@@ -301,7 +312,7 @@ function M.setup()
       requires = {
         "williamboman/mason-lspconfig.nvim",
         "neovim/nvim-lspconfig",
-      }
+      },
     }
 
     -- Mason-lspConfig
@@ -310,7 +321,7 @@ function M.setup()
       requires = {
         "williamboman/mason.nvim",
         "neovim/nvim-lspconfig",
-      }
+      },
     }
 
     -- Mason-null-ls
@@ -362,7 +373,7 @@ function M.setup()
         "cmp-nvim-lsp",
         "null-ls.nvim",
         "mason-null-ls.nvim",
-      },  -- for nvim-cmp
+      }, -- for nvim-cmp
       -- wants = { "nvim-lsp-installer", "lsp_signature.nvim", "coq_nvim" },  -- for coq.nvim
       config = function()
         require("config.lsp").setup()
