@@ -161,7 +161,7 @@ function M.setup()
     -- Better surround
     use { "tpope/vim-surround", event = "InsertEnter", disable = true }
 
-    -- Motions
+    -- Motions --
     use { "andymass/vim-matchup", event = "CursorMoved" }
     use { "wellle/targets.vim", event = "CursorMoved" }
     use { "unblevable/quick-scope", event = "CursorMoved", disable = false }
@@ -175,11 +175,25 @@ function M.setup()
       end,
       disable = true,
     }
+
     use {
-      "ggandor/lightspeed.nvim",
+      "ggandor/leap.nvim",
       keys = { "s", "S", "f", "F", "t", "T" },
       config = function()
-        require("lightspeed").setup {}
+        local leap = require "leap"
+        leap.set_default_keymaps()
+      end,
+    }
+
+    use {
+      "abecodes/tabout.nvim",
+      wants = { "nvim-treesitter" },
+      after = { "nvim-cmp" },
+      config = function()
+        require("tabout").setup {
+          completion = false,
+          ignore_beginning = true,
+        }
       end,
     }
 
@@ -207,13 +221,6 @@ function M.setup()
     -- FZF
     -- use { "junegunn/fzf", run = "./install --all", event = "VimEnter" } -- You don't need to install this if you already have fzf installed
     -- use { "junegunn/fzf.vim", event = "BufEnter" }
-
-    -- FZF Lua
-    use {
-      "ibhagwan/fzf-lua",
-      event = "BufEnter",
-      wants = "nvim-web-devicons",
-    }
 
     -- nvim-tree
     use {
@@ -246,11 +253,14 @@ function M.setup()
           },
         }
       end,
-      disable = true,
     }
 
     -- Telescope
-    use { "nvim-telescope/telescope.nvim", module = "telescope", as = "telescope" }
+    use { 
+      "nvim-telescope/telescope.nvim", 
+      module = "telescope", 
+      as = "telescope",
+    }
 
     -- Auto Completion
     use {
@@ -391,6 +401,8 @@ function M.setup()
     use {
       "ray-x/lsp_signature.nvim",
     }
+
+    -- Jumps --
 
     -- Bootstrap Neovim
     if packer_bootstrap then
