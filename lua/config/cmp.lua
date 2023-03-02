@@ -42,7 +42,7 @@ function M.setup()
   local cmp = require "cmp"
 
   cmp.setup {
-    completion = { completeopt = "menu,noselect,longest,preview", keyword_length = 2 },
+    completion = { completeopt = "menuone,longest,preview", keyword_length = 2 },
     -- experimental = { native_menu = false, ghost_text = false },
     snippet = {
       expand = function(args)

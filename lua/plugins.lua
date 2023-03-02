@@ -156,6 +156,9 @@ function M.setup()
     use {
       "cbochs/grapple.nvim",
       requires = { "nvim-lua/plenary.nvim" },
+      config = function()
+        require("grapple").setup()
+      end,
     }
 
     -- Better surround
@@ -256,9 +259,9 @@ function M.setup()
     }
 
     -- Telescope
-    use { 
-      "nvim-telescope/telescope.nvim", 
-      module = "telescope", 
+    use {
+      "nvim-telescope/telescope.nvim",
+      module = "telescope",
       as = "telescope",
     }
 

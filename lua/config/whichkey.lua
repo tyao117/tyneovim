@@ -66,7 +66,10 @@ local function normal_keymap()
       u = { "<cmd>PackerUpdate<cr>", "Update" },
     },
 
-    f = keymap_f
+    f = keymap_f,
+
+    ["j"] = { "<cmd>lua require( 'grapple' ).select { key = '{name}' }<CR>", "Grapple Select"},
+    ["J"] = { "<cmd>lua require( 'grapple' ).toggle { key = '{name}' }<CR>", "Grapple Toggle"},
   }
   whichkey.register(keymap, opts)
 end
