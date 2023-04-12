@@ -41,9 +41,6 @@ function M.setup()
   local function plugins(use)
     use { "wbthomason/packer.nvim" }
 
-    -- Load only when require
-    use { "nvim-lua/plenary.nvim", module = "plenary" }
-
     -- LuaSnip
     use { "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*" }
 
@@ -74,7 +71,7 @@ function M.setup()
     -- Treesitter
     use {
       "nvim-treesitter/nvim-treesitter",
-      event = "BufReadPre",
+      -- event = "BufReadPre",
       run = ":TSUpdate",
       config = function()
         require("config.treesitter").setup()
@@ -256,13 +253,15 @@ function M.setup()
           },
         }
       end,
+      after = "telescope.nvim",
     }
 
     -- Telescope
     use {
       "nvim-telescope/telescope.nvim",
-      module = "telescope",
-      as = "telescope",
+      requires = {
+        { "nvim-lua/plenary.nvim" },
+      },
     }
 
     -- Auto Completion
@@ -282,11 +281,11 @@ function M.setup()
       disable = true,
     }
 
-    -- Autocomplete
+    -- Auto Completion
     use {
       "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
-      opt = true,
+      -- event = "InsertEnter",
+      -- opt = true,
       config = function()
         require("config.cmp").setup()
       end,
@@ -386,8 +385,7 @@ function M.setup()
         "cmp-nvim-lsp",
         "null-ls.nvim",
         "mason-null-ls.nvim",
-      }, -- for nvim-cmp
-      -- wants = { "nvim-lsp-installer", "lsp_signature.nvim", "coq_nvim" },  -- for coq.nvim
+      },
       config = function()
         require("config.lsp").setup()
       end,
@@ -397,6 +395,7 @@ function M.setup()
         "ray-x/lsp_signature.nvim",
         "jose-elias-alvarez/null-ls.nvim",
         "jay-babu/mason-null-ls.nvim",
+        "nvim-telescope/telescope.nvim",
       },
     }
 
@@ -405,7 +404,14 @@ function M.setup()
       "ray-x/lsp_signature.nvim",
     }
 
-    -- Jumps --
+    -- Git Signs
+    use {
+      "lewis6991/gitsigns.nvim",
+      event = "BufReadPre",
+      config = function()
+        require("gitsigns").setup()
+      end,
+    }
 
     -- Bootstrap Neovim
     if packer_bootstrap then

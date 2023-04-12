@@ -11,8 +11,8 @@ local sources = {
   b.formatting.fixjson,
   b.formatting.isort,
   b.formatting.stylua,
-  b.formatting.golines,
   b.formatting.autopep8,
+  b.formatting.gofumpt,
 
   -- hover
   b.hover.dictionary,

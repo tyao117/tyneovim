@@ -39,6 +39,7 @@ function M.on_attach(client, bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
@@ -69,7 +70,7 @@ function M.setup()
   -- null-ls
   require("config.lsp.null-ls").setup(opts)
 
-  -- Installer
+  -- Mason Installer
   require("config.lsp.mason-installer").setup(servers, opts)
 end
 

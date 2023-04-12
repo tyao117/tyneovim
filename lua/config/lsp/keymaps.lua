@@ -31,15 +31,15 @@ local function keymappings(client, bufnr)
 
   local keymap_g = {
     name = "Goto",
-    d = { "<Cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
-    D = { "<Cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
-    r = { "<Cmd>lua vim.lsp.buf.references()<CR>", "References" },
-    s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
-    I = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto Implementation" },
-    t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
+    d = { "<Cmd>Telescope lsp_definitions<CR>", "Definitions" },
+    D = { "<Cmd>Telescope lsp_declarations<CR>", "Declarations" },
+    r = { "<Cmd>Telescope lsp_references<CR>", "References" },
+    s = { "<Cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
+    I = { "<Cmd>Telescope lsp_implementations<CR>", "Goto Implementation" },
+    t = { "<Cmd>Telescope lsp_type_definitions<CR>", "Goto Type Definition" },
   }
-  whichkey.register(keymap_l, { buffer = bufnr, prefix = "<leader>" })
-  whichkey.register(keymap_g, { buffer = bufnr, prefix = "g" })
+  whichkey.register(keymap_l, { buffer = bufnr, prefix = "<leader>", silent=true, noremap = true })
+  whichkey.register(keymap_g, { buffer = bufnr, prefix = "g", silent = true, noremap = true })
 end
 
 function M.setup(client, bufnr)
