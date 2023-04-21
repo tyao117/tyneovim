@@ -262,6 +262,9 @@ function M.setup()
       requires = {
         { "nvim-lua/plenary.nvim" },
       },
+      config = function()
+        require("config.telescope").setup()
+      end,
     }
 
     -- Auto Completion

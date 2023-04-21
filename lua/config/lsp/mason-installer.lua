@@ -6,7 +6,7 @@ function M.setup(servers, options)
   -- Package installation folder
   require("mason-lspconfig").setup {
     ensure_installed = vim.tbl_keys(servers),
-    automatic_isntallation = false,
+    automatic_installation = false,
   }
 
   require("mason-lspconfig").setup_handlers {

@@ -14,6 +14,11 @@ local servers = {
   rust_analyzer = {},
   tsserver = {},
   vimls = {},
+  yamlls = {
+    yaml = {
+      validate = false,
+    },
+  },
 }
 
 function M.on_attach(client, bufnr)
@@ -59,7 +64,7 @@ local opts = {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
   flags = {
-    debounce_text_changes = 150,
+    debounce_text_changes = 500,
   },
 }
 

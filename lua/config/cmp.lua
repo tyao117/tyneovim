@@ -1,7 +1,5 @@
 local M = {}
 
-vim.o.completeopt = "menu,menuone,noselect"
-
 local types = require "cmp.types"
 
 local kind_icons = {
@@ -42,7 +40,10 @@ function M.setup()
   local cmp = require "cmp"
 
   cmp.setup {
-    completion = { completeopt = "menuone,longest,preview", keyword_length = 2 },
+    completion = {
+      completeopt = "menuone,noselect,preview",
+      keyword_length = 2,
+    },
     -- experimental = { native_menu = false, ghost_text = false },
     snippet = {
       expand = function(args)
@@ -71,8 +72,18 @@ function M.setup()
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       --- ["<C-c>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      ["<C-c>"] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+      ["<C-c>"] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
+      ["<Esc>"] = cmp.mapping {
+        i = function(fallback)
+          if cmp.visible() then
+            cmp.mapping.close()
+          else
+            fallback()
+          end
+        end,
+        c = cmp.mapping.close(),
+      },
       ["<CR>"] = cmp.mapping {
         i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
         c = function(fallback)
@@ -156,6 +167,12 @@ function M.setup()
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
         winhighlight = "NormalFloat:NormalFloat,FloatBorder:TelescopeBorder",
       },
+    },
+    performance = {
+      -- mostly arbitrary numbers
+      debounce = 300,
+      throttle = 60,
+      fetching_timeout = 200,
     },
   }
 

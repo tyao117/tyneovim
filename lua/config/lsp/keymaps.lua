@@ -31,12 +31,17 @@ local function keymappings(client, bufnr)
 
   local keymap_g = {
     name = "Goto",
-    d = { "<Cmd>Telescope lsp_definitions<CR>", "Definitions" },
-    D = { "<Cmd>Telescope lsp_declarations<CR>", "Declarations" },
-    r = { "<Cmd>Telescope lsp_references<CR>", "References" },
+    d = { "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", "Definitions" },
+    -- d = { "<Cmd>Telescope lsp_definitions<CR>", "Definitions" },
+    D = { "<Cmd>lua require('telescope.builtin').lsp_declarations()<cr>", "Declarations" },
+    -- D = { "<Cmd>Telescope lsp_declarations<CR>", "Declarations" },
+    r = { "<Cmd>lua require('telescope.builtin').lsp_references()<cr>", "References" },
+    -- r = { "<Cmd>Telescope lsp_references<CR>", "References" },
     s = { "<Cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
-    I = { "<Cmd>Telescope lsp_implementations<CR>", "Goto Implementation" },
-    t = { "<Cmd>Telescope lsp_type_definitions<CR>", "Goto Type Definition" },
+    I = { "<Cmd>lua require('telescope.builtin').lsp_implementations()<CR>", "Goto Implementation" },
+    -- I = { "<Cmd>Telescope lsp_implementations<CR>", "Goto Implementation" },
+    t = { "<Cmd>lua require('telescope.builtin').lsp_type_definitions()<CR>", "Goto Type Definition" },
+    -- t = { "<Cmd>Telescope lsp_type_definitions<CR>", "Goto Type Definition" },
   }
   whichkey.register(keymap_l, { buffer = bufnr, prefix = "<leader>", silent=true, noremap = true })
   whichkey.register(keymap_g, { buffer = bufnr, prefix = "g", silent = true, noremap = true })

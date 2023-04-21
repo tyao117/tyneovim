@@ -14,6 +14,15 @@ local sources = {
   b.formatting.autopep8,
   b.formatting.gofumpt,
 
+  -- diagnostics
+  b.diagnostics.yamllint.with(
+    {
+      rules = {
+        key_ordering = disable,
+      },
+    }
+  ),
+
   -- hover
   b.hover.dictionary,
 }
