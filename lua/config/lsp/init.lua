@@ -7,12 +7,36 @@ local servers = {
       unreachable = true,
     },
     staticcheck = true,
+    buildFlags = {"-tags=integration,examples"},
+  },
+  lua_ls = {
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = "LuaJIT",
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = { "vim" },
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
   },
   html = {},
   jsonls = {},
   pyright = {},
   rust_analyzer = {},
   tsserver = {},
+  terraformls = {},
   vimls = {},
   yamlls = {
     yaml = {
@@ -35,6 +59,9 @@ function M.on_attach(client, bufnr)
 
   -- Configure key mappings
   require("config.lsp.keymaps").setup(client, bufnr)
+
+  -- Configure using help on a function
+  -- require("lsp_signature").on_attach(signature_setup, bufnr)
 
   -- nvim-navic
   if client.server_capabilities.documentSymbolProvider then
@@ -68,10 +95,10 @@ local opts = {
   },
 }
 
--- Setup LSP handlers
-require("config.lsp.handlers").setup()
-
 function M.setup()
+  -- Setup LSP handlers
+  require("config.lsp.handlers").setup()
+
   -- null-ls
   require("config.lsp.null-ls").setup(opts)
 

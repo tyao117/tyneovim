@@ -37,11 +37,11 @@ local function keymappings(client, bufnr)
     -- D = { "<Cmd>Telescope lsp_declarations<CR>", "Declarations" },
     r = { "<Cmd>lua require('telescope.builtin').lsp_references()<cr>", "References" },
     -- r = { "<Cmd>Telescope lsp_references<CR>", "References" },
-    s = { "<Cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
     I = { "<Cmd>lua require('telescope.builtin').lsp_implementations()<CR>", "Goto Implementation" },
     -- I = { "<Cmd>Telescope lsp_implementations<CR>", "Goto Implementation" },
     t = { "<Cmd>lua require('telescope.builtin').lsp_type_definitions()<CR>", "Goto Type Definition" },
     -- t = { "<Cmd>Telescope lsp_type_definitions<CR>", "Goto Type Definition" },
+    s = { "<Cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
   }
   whichkey.register(keymap_l, { buffer = bufnr, prefix = "<leader>", silent=true, noremap = true })
   whichkey.register(keymap_g, { buffer = bufnr, prefix = "g", silent = true, noremap = true })

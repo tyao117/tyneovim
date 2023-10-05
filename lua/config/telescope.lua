@@ -9,7 +9,7 @@ local new_maker = function(filepath, bufnr, opts)
     if not stat then
       return
     end
-    if stat.size > 100000 then
+    if stat.size > 1000000 then
       return
     else
       previewers.buffer_previewer_maker(filepath, bufnr, opts)
@@ -24,8 +24,13 @@ function M.setup()
     defaults = {
       buffer_previewer_maker = new_maker,
     },
+    pickers = {
+      find_files = {
+        find_command = { "rg", "--files", "--hidden", "--glob", "!.git", "--glob", "!.stack-work", "." },
+      },
+    },
   }
-  pcall(telescope.load_extension, 'fzf')
+  pcall(telescope.load_extension, "fzf")
 end
 
 return M

@@ -10,7 +10,6 @@ function M.setup()
       enable = true,
       threshold = 1, -- the amount in ms that a plugins load time must be over for it to be included in the profile
     },
-
     display = {
       open_fn = function()
         return require("packer.util").float { border = "rounded" }
@@ -78,7 +77,7 @@ function M.setup()
       end,
       requires = {
         { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufReadPre" },
-        { "windwp/nvim-ts-autotag", event = "InsertEnter" },
+        { "windwp/nvim-ts-autotag",                      event = "InsertEnter" },
       },
     }
 
@@ -278,8 +277,8 @@ function M.setup()
         require("config.coq").setup()
       end,
       requires = {
-        { "ms-jpq/coq.artifacts", branch = "artifacts" },
-        { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
+        { "ms-jpq/coq.artifacts",  branch = "artifacts" },
+        { "ms-jpq/coq.thirdparty", branch = "3p",       module = "coq_3p" },
       },
       disable = true,
     }
@@ -301,7 +300,7 @@ function M.setup()
         "hrsh7th/cmp-cmdline",
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lsp",
-        -- "hrsh7th/cmp-nvim-lsp-signature-help",
+        "hrsh7th/cmp-nvim-lsp-signature-help",
         -- "hrsh7th/cmp-calc",
         -- "f3fora/cmp-spell",
         -- "hrsh7th/cmp-emoji",

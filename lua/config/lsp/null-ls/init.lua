@@ -30,7 +30,7 @@ local sources = {
 function M.setup(opts)
   nls.setup {
     -- debug = true,
-    debounce = 150,
+    debounce = 500,
     save_after_format = false,
     sources = sources,
     on_attach = opts.on_attach,

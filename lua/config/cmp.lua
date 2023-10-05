@@ -71,36 +71,57 @@ function M.setup()
     mapping = {
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-      --- ["<C-c>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      ["<C-c>"] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
-      ["<Esc>"] = cmp.mapping {
-        i = function(fallback)
-          if cmp.visible() then
-            cmp.mapping.close()
-          else
-            fallback()
-          end
-        end,
-        c = cmp.mapping.close(),
-      },
-      ["<CR>"] = cmp.mapping {
-        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
-        c = function(fallback)
-          if cmp.visible() then
-            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
-          else
-            fallback()
-          end
-        end,
-      },
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    --   ["<C-c>"] = cmp.mapping {
+    --     i = cmp.mapping.close(),
+    --     c = cmp.mapping.close(),
+    --   },
+    --   ["<Esc>"] = cmp.mapping {
+    --     i = cmp.mapping.abort(),
+    --     c = cmp.mapping.abort(),
+    --   },
+    --   ["<CR>"] = cmp.mapping {
+    --     i = function(fallback)
+    --       if cmp.visible() then
+    --         if has_words_before() then
+    --           cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+    --         else
+    --           cmp.confirm { behavior = cmp.ConfirmBehavior.Insert, select = false }
+    --         end
+    --       else
+    --         fallback()
+    --       end
+    --     end,
+    --     c = function(fallback)
+    --       -- if the complete menu is visible and an item was selected from the menu
+    --       if cmp.visible() and (vim.v.completed_item or {}).word then
+    --         cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+    --       else
+    --         fallback()
+    --       end
+    --     end,
+    --   },
       ["<C-j>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
-        elseif has_words_before() then
-          cmp.complete()
+          -- elseif has_words_before() then
+          --   cmp.complete()
+        else
+          fallback()
+        end
+      end, {
+        "i",
+        "s",
+        "c",
+      }),
+      ["<C-k>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+          luasnip.jump(-1)
         else
           fallback()
         end
@@ -115,20 +136,7 @@ function M.setup()
         elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
         elseif has_words_before() then
-          cmp.complete()
-        else
-          fallback()
-        end
-      end, {
-        "i",
-        "s",
-        "c",
-      }),
-      ["<C-k>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)
+        --  cmp.complete()
         else
           fallback()
         end
@@ -158,6 +166,7 @@ function M.setup()
       { name = "luasnip" },
       { name = "nvim_lua" },
       { name = "path" },
+      { name = "nvim_lsp_signature_help" },
       -- { name = "spell" },
       -- { name = "emoji" },
       -- { name = "calc" },
@@ -170,7 +179,7 @@ function M.setup()
     },
     performance = {
       -- mostly arbitrary numbers
-      debounce = 300,
+      debounce = 500,
       throttle = 60,
       fetching_timeout = 200,
     },
